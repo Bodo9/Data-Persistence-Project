@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void playGame()
+    public void PlayGame()
     {
         TMP_InputField playerNameInput = GameObject.Find("Name Input").GetComponent<TMP_InputField>();
         if (playerNameInput.text != "")
@@ -33,5 +34,14 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(1);
+    }
+
+    public void Quit()
+    {
+#if (UNITY_EDITOR)
+        EditorApplication.ExitPlaymode();
+#else
+        Application.Quit();
+#endif
     }
 }
